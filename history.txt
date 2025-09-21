@@ -1,0 +1,55 @@
+    1  ls
+    2  git clone https://github.com/swapnibrad/3ri_batch_2.com
+    3  git clone https://github.com/swapnibrad/3ri_batch_2.git
+    4  yum install git -y
+    5  git clone https://github.com/swapnibrad/3ri_batch_2.git
+    6  ls
+    7  cd 3ri_batch_2
+    8  ls
+    9  vim file.py
+   10  cat file.py 
+   11  git push
+   12  cd
+   13  ssh-keygen 
+   14  ls /root/.ssh/
+   15  cat /root/.ssh/id_rsa
+   16  cat /root/.ssh/id_rsa.pub 
+   17  ls
+   18  ls /root/.ssh/
+   19  cat /root/.ssh/authorized_keys
+   20  cat /root/.ssh/authorized_keys 
+   21  cp /home/ec2-user/delete_stk_u2.pem /root/.ssh/
+   22  ls /root/.ssh/
+   23  rm -fr /root/.ssh/id_rsa*
+   24  ls /root/.ssh/
+   25  ls
+   26  cd 3ri_batch_2/
+   27  ls
+   28  git status 
+   29  git add .
+   30  git commit -m "added file to local repo of ec2 instancee"
+   31  git push
+   32  cd ..
+   33  ls
+   34  rm 3ri_batch_2/
+   35  rm 3ri_batch_2/ -fr
+   36  ls
+   37  git pull git@github.com:swapnibrad/3ri_batch_2.git
+   38  git clone git@github.com:swapnibrad/3ri_batch_2.git
+   39  chmod 400 /root/.ssh/delete_stk_u2.pem 
+   40  git clone git@github.com:swapnibrad/3ri_batch_2.git
+   41  ssh -T git@github.com
+   42  chmod 400 /root/.ssh/delete_stk_u2.pem 
+   43  ssh -T git@github.com
+   44  git clone git@github.com:swapnibrad/3ri_batch_2.git
+   45  cp /root/.ssh/authorized_keys /home/ec2-user/.ssh/
+   46  cp /root/.ssh/delete_stk_u2.pem /home/ec2-user/.ssh/
+   47  git clone git@github.com:swapnibrad/3ri_batch_2.git
+   48  ssh-keygen 
+   49  ls /root/.ssh/
+   50  cat /root/.ssh/id_rsa.pub 
+   51  git clone git@github.com:swapnibrad/3ri_batch_2.git
+   52  ls
+   53  cd 3ri_batch_2/
+   54  ls
+   55  history >> history.txt
