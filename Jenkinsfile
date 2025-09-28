@@ -3,15 +3,19 @@ pipeline {
     stages {
         stage('install pkgs') { 
             steps {
+                sh ''' 
                echo "install nginx application"
                sudo apt-get install nginx -y
+             '''
             }
         }
         stage('configure appln') { 
             steps {
+                sh ''' 
                 echo "this is test stage"
                 systemctl start nginx
                 systemctl enable nginx
+             '''
             }
         }
         stage('web-page') { 
