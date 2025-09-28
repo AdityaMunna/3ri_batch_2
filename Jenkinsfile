@@ -17,7 +17,7 @@ pipeline {
         stage('web-page') { 
             steps {
                 echo "this is test deploymment1"
-                sudo cp /home/ubuntu/2095_level/* /var/www/html
+                sudo cp /home/ubuntu/2095_level/ /var/www/html
             }
         }
         stage('Deployment') { 
