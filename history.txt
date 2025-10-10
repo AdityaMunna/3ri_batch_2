@@ -1,0 +1,33 @@
+    1  ls
+    2  cd 3ri_batch_2/
+    3  ls
+    4  ssh -
+    5  ssh-
+    6  git push
+    7  ssh-
+    8  ssh- keygen
+    9  git version --
+   10  git status
+   11  ssh-keygen
+   12  ls /root/ sch/
+   13  ls /root/ sSh/
+   14  ls /root/ ssh/
+   15  ls /root/.ssh/
+   16  cat /root/.ssh/id_rsa| cat /root/.ssh/id_rsa
+   17  cat /root/.ssh/id_rsa.pub
+   18  ls /root/.ssh/
+   19  cat /root/.ssh/authorized_keys
+   20  ls
+   21  pwd
+   22  ls
+   23  cd 3ri_batch_2/
+   24  ls
+   25  ssh -keygen
+   26  ssh-keygen
+   27  ls /root/.ssh/
+   28  cat /root/.ssh/id_rsa.pub
+   29  git clone git@github.com:AdityaMunna/3ri_batch_2.git
+   30  ls
+   31  cd 3ri_batch_2/
+   32  ls
+   33  history >> history.txt
