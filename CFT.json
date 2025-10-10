@@ -1,0 +1,134 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "VPC with public and private subnets, each with one EC2 instance.",
+  "Resources": {
+    "VPC": {
+      "Type": "AWS::EC2::VPC",
+      "Properties": {
+        "CidrBlock": "10.0.0.0/26",
+       
+        "Tags": [{ "Key": "Name", "Value": "ADITYA-VPC-CFT" }]
+      }
+    },
+    "InternetGateway": {
+      "Type": "AWS::EC2::InternetGateway"
+    },
+    "AttachGateway": {
+      "Type": "AWS::EC2::VPCGatewayAttachment",
+      "Properties": {
+        "VpcId": { "Ref": "VPC" },
+        "InternetGatewayId": { "Ref": "InternetGateway" }
+      }
+    },
+    "PublicSubnet": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": { "Ref": "VPC" },
+        "CidrBlock": "10.0.0.0/27",
+        "AvailabilityZone": "us-east-1a",
+        "Tags": [{ "Key": "Name", "Value": "PublicSubnet-BY-CFT" }]
+      }
+    },
+    "PrivateSubnet": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": { "Ref": "VPC" },
+        "CidrBlock": "10.0.0.32/27",
+        "AvailabilityZone": "us-east-1b",
+        "Tags": [{ "Key": "Name", "Value": "PrivateSubnet-by-cft" }]
+      }
+    },
+    "PublicRouteTable": {
+      "Type": "AWS::EC2::RouteTable",
+      "Properties": {
+        "VpcId": { "Ref": "VPC" }
+      }
+    },
+    "PublicRoute": {
+      "Type": "AWS::EC2::Route",
+      "DependsOn": "AttachGateway",
+      "Properties": {
+        "RouteTableId": { "Ref": "PublicRouteTable" },
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": { "Ref": "InternetGateway" }
+      }
+    },
+    "PublicSubnetRouteTableAssociation": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "SubnetId": { "Ref": "PublicSubnet" },
+        "RouteTableId": { "Ref": "PublicRouteTable" }
+      }
+    },
+    "PublicSecurityGroup": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "Allow SSH and ICMP",
+        "VpcId": { "Ref": "VPC" },
+        "SecurityGroupIngress": [
+          {
+            "IpProtocol": "tcp",
+            "FromPort": 22,
+            "ToPort": 22,
+            "CidrIp": "0.0.0.0/0"
+          },
+          {
+            "IpProtocol": "icmp",
+            "FromPort": -1,
+            "ToPort": -1,
+            "CidrIp": "0.0.0.0/0"
+          }
+        ]
+      }
+    },
+    "PrivateSecurityGroup": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "Allow SSH from public subnet",
+        "VpcId": { "Ref": "VPC" },
+        "SecurityGroupIngress": [
+          {
+            "IpProtocol": "tcp",
+            "FromPort": 22,
+            "ToPort": 22,
+            "SourceSecurityGroupId": { "Ref": "PublicSecurityGroup" }
+          }
+        ]
+      }
+    },
+    "PublicInstance": {
+      "Type": "AWS::EC2::Instance",
+      "Properties": {
+        "InstanceType": "t2.micro",
+        "ImageId": "ami-00ca32bbc84273381",
+        "NetworkInterfaces": [
+      {
+        "DeviceIndex": 0,
+        "AssociatePublicIpAddress": true,
+        "SubnetId": { "Ref": "PublicSubnet" },
+        "GroupSet": [ { "Ref": "PublicSecurityGroup" } ]
+      }
+    ],
+        "KeyName": "ADITYA",
+        "Tags": [{ "Key": "Name", "Value": "PublicInstance" }]
+      }
+    },
+    "PrivateInstance": {
+      "Type": "AWS::EC2::Instance",
+      "Properties": {
+        "InstanceType": "t2.micro",
+        "ImageId": "ami-00ca32bbc84273381",
+        "NetworkInterfaces": [
+      {
+        "DeviceIndex": 0,
+        "AssociatePublicIpAddress": false,
+        "SubnetId": { "Ref": "PublicSubnet" },
+        "GroupSet": [ { "Ref": "PrivateSecurityGroup" } ]
+      }
+    ],
+        "KeyName": "ADITYA",
+        "Tags": [{ "Key": "Name", "Value": "PrivateInstance" }]
+      }
+    }
+  }
+}
