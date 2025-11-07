@@ -1,3 +1,4 @@
+ls
 pipeline {
     agent any
     stages {
